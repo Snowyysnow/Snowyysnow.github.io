@@ -1,0 +1,24 @@
+table,
+#phone{
+	border:1px #31e00d solid;
+	max-width:320px;
+	height:600px;
+	margin-left: 100px;
+		margin-right: 100px;
+		border-radius:20px;
+	}
+
+
+	#phone_bottom{
+	border:1px #31e00d solid;
+	max-width:320px;
+	height:100px;
+	margin-left: auto;
+		margin-right: auto;
+		border-radius:20px;
+	}
+
+body{
+  font-family: Arial;
+  background-color: lightcyan;
+}
