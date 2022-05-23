@@ -1,142 +1,148 @@
-// create variables
-var time=45; //how much time they get
-var timesup=0;
-var started=0;
+var playing = false;
+var score = 0;
+var action;
+var timeRemaining;
+var correctAnswer;
 
-// +,-,x,or /
-var operator;
-
-var rightAnswer;
-
-// start countdown
-function CountDown() {
-if(time>0)
-	{
-	document.math.timer.value=time;
-	time=time-1;
-	var gameTimer=setTimeout("CountDown()", 1000)}
-	else if (time==0)
-		{document.math.timer.value="0";
-		timesup=1;
-		alert('Time\'s Up!');
-		document.math.firstnum.value="";
-		document.math.operator.value="";
-		document.math.secondnum.value="";
-		document.math.answer.value="";
-	}
-}
-
-// Start the game
-function startgame(){
-	if (started!=0){
-		alert('You\'ve Already Started!');}
-	else
-	{
-		started=1;
-		CountDown();
-		getProb();
-	}
-}
-
-
-//generate a random number between 2 intergers
-// return the random number
-function randnum(min,max)
+//if we click on the start/reset
+document.querySelector("#startreset").onclick = () =>
 {
-var num=Math.round(Math.random()*(max-min))+min;
-return num;
+    //if we are playing
+    if (playing) {
+        //reload page
+        location.reload();
+    }
+    // if we are not playing
+    else {
+        //change the mode of playing
+        playing = true;
+        //set score to 0
+        score = 0;
+        document.querySelector("#scorevalue").innerHTML = score;
+        //show countdown box
+        showElement("timeremaining");
+        //countdown time
+        timeRemaining = 60;
+        //show countdown in sec
+        document.querySelector("#timeremainingvalue").innerHTML = timeRemaining;
+        //hide the game over box
+        hideElement("gameOver");
+        //change button to reset
+        document.querySelector("#startreset").innerHTML = "Reset Game";
+        //start countdown
+        startCountdown();
+        //generate new Q&A
+        generateQA();
+    }
 }
 
+for (let i = 1; i < 5; i++) {
+    //if we click on answer box
+    document.querySelector("#box" + i).onclick = () =>
+    {
+        //if we are playing
+        if (playing) {
+            //if correct answer
+            if (document.querySelector("#box" + i).innerHTML == correctAnswer) {
+                //increase score by 1
+                score++;
+                //set score value
+                document.querySelector("#scorevalue").innerHTML = score;
+                //hide wrong box and show correct box
+                hideElement("wrong");
+                showElement("correct");
+                setTimeout(() =>
+                {
+                    hideElement("correct");
+                }, 1000);
 
-// gernerate the question
-// populate the form forelds
-// generate the answer 
-
-function getProb(){	
-// select operand
-// use our randnum function defined earlier
-operator = randnum(1,4);
-
-// operator +
-if (operator=="1"){
-	document.math.operator.value="+";
-	var choose1=randnum(0,50);
-	var choose2=randnum(0,50);
-	document.math.firstnum.value=choose1;
-	document.math.secondnum.value=choose2;
-	rightAnswer=choose1 + choose2;
+                //generate new Q&A
+                generateQA();
+            }
+            //if wrong answer
+            else {
+                //show wrong box and hide correct box
+                hideElement("correct");
+                showElement("wrong");
+                setTimeout(() =>
+                {
+                    hideElement("wrong");
+                }, 1000);
+            }
+        }
+    }
 }
 
-// operator -
-if (operator=="2"){
-	document.math.operator.value="-";
-	var choose2=randnum(0,50);
-	var choose1=randnum(choose2,50);
-	document.math.firstnum.value=choose1;
-	document.math.secondnum.value=choose2;
-	rightAnswer=choose1 -  choose2;
+function startCountdown()
+{
+    action = setInterval(() =>
+    {
+        //reduce time by 1sec in loops
+        timeRemaining -= 1;
+        //show countdown in sec
+        document.querySelector("#timeremainingvalue").innerHTML = timeRemaining;
+        //no time left
+        if (timeRemaining == 0) {
+            //game over
+            stopCountdown();
+            //show game over box
+            showElement("gameOver");
+            //show game over message and score
+            document.querySelector("#gameOver").innerHTML = "<p>Game Over!</p><p>Your score is : " + score + ".</p>";
+            //hide countdown
+            hideElement("timeremaining");
+            //hide correct box
+            hideElement("correct");
+            //hide wrong box
+            hideElement("wrong");
+            //change the mode of playing
+            playing = false;
+            //change button to start 
+            document.querySelector("#startreset").innerHTML = "Start Game";
+        }
+    }, 1000);
 }
 
-
-// operator *
-if (operator=="3"){
-	document.math.operator.value="x";
-	var choose1=randnum(0,10);
-	var choose2=randnum(0,10);
-	document.math.firstnum.value=choose1;
-	document.math.secondnum.value=choose2;
-	rightAnswer=choose1 * choose2;
+function stopCountdown()
+{
+    //stop countdown
+    clearInterval(action);
 }
 
-// operator /
-if (operator=="4"){
-	document.math.operator.value="/";
-	var choose2=randnum(1,10);
-	var choose1=choose2 * randnum(0,10);
-	document.math.firstnum.value=choose1;
-	document.math.secondnum.value=choose2;
-	rightAnswer=choose1 /  choose2;
-	}
+function hideElement(Id)
+{
+    document.querySelector("#" + Id).style.display = "none";
 }
 
+function showElement(Id)
+{
+    document.querySelector("#" + Id).style.display = "block";
+}
 
+function generateQA()
+{
+    //generating random number between 1-9
+    var x = 1 + Math.round(9 * Math.random());
+    var y = 1 + Math.round(9 * Math.random());
+    //correct answer
+    correctAnswer = x * y;
+    //setting question
+    document.querySelector("#question").innerHTML = x + " x " + y;
+    //setting random position for correct answer
+    var correctPosition = 1 + Math.round(3 * Math.random());
+    document.querySelector("#box" + correctPosition).innerHTML = correctAnswer;
 
-// check your answer against the answer to the question
-function answerit(){
-	// has the gane started
-	if (started==0)	{
-		alert('You Must Click The Button Labeled \'Start\'!');}
-	else {
-	// is time up?	
-	if (timesup!=0)	{
-		alert('Time Ran Out!');}
-	else{
+    var answers = [correctAnswer];
 
-		// assing user answer and user points to variables
-		var userAnswer=eval(document.math.answer.value);
-		var userPoints=eval(document.math.points.value);
-		
-
-			// has the use entered ann answer
-			if (userAnswer==null){
-				// no
-				alert('Put Your Answer In The Box To The Left Of The Button Labeled \'Answer\'!');
-				document.math.answer.select();
-				}
-				//yes
-				else{
-					// is their answer right
-					if (userAnswer == rightAnswer){
-					alert('Right');
-					theirpoints++;
-					document.math.points.value=userPoints;
-					}
-					else{
-						// no, it's wrong
-						alert(userAnswer + " is wrong!\n\n" + rightAnswer + " is correct!")}
-						document.math.answer.select();
-						getProb();
-						}
-					}
-				}
-	}
+    //checking and replacing duplicate values
+    for (let i = 1; i < 5; i++) {
+        if (i != correctPosition) {
+            var wrongAnswer;
+            do {
+                wrongAnswer = (1 + Math.round(9 * Math.random())) * (1 + Math.round(9 * Math.random()));
+            } while ((answers.indexOf(wrongAnswer)) > -1)
+            document.querySelector("#box" + i).innerHTML = wrongAnswer;
+            answers.push(wrongAnswer)
+        }
+    }
+}
