@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>U7 - Math Quiz 2</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>   
+
+
+
+	 
+<table align="center">
+  <tr>
+    <td colspan="3" align="center"><input type="button" value="New Game" onClick="location.reload();"></td>
+		</tr>
+
+
+		<tr>			
+    <td colspan="3" align="center">
+			
+			<label for="cars">Choose a level:</label>
+
+					<select name="selectlevel" id="selectlevel" onchange="setlevel()" >
+						<option value="0">Level 0</option>
+						<option value="Level 1">Level 1</option>
+						<option value="Level 2">Level 2</option>
+					
+					</select>
+		
+		</td>
+
+		<tr>			
+    <td colspan="3" align="center"><input type="button" value="Start" size="5" onClick="startgame()">
+		</td>
+  </tr>
+  <tr>
+
+    <form name="math" >
+      <td colspan="3" align="center">
+				<b><font size="3" color="#0000FF">Time: </font></b> 
+				
+				<font size="3" color="#0000FF"> </font>
+				<input type="text" name="timer" id="timer" size="5"></td>
+    </tr>
+
+
+
+
+
+
+		
+    <tr>
+      <td align="right"><b><font size="3" color="#0000FF">Question: </font></b> <font size="3" color="#0000FF"> </font><input type="text" name="firstnum" size="5"></td>
+
+      <td align="center"><input type="text" name="operator" size="2"></td>
+      <td align="left"><input type="text" name="secondnum" size="5"></td>
+    </tr>
+    <tr>
+      <td colspan="3" align="center"><hr><b><font size="3" color="#0000FF">Answer:</font> </b> <input type="text" name="answer" size="5"> <input type="button" value="Answer" onClick="answerit();"><hr></td>
+    </tr>
+    <tr>
+
+      <td  colspan="3" align="center"><font color="#0000FF">Corrects</font><font face="Arial, Helvetica, Sans Serif" size="3" color="#0000FF"><b>:</b> </font> <input type="text" name="points" size="5" value="0">
+			
+				
+			</td>
+    </tr>
+    <tr>
+    </form>
+
+		<td>
+		
+
+
+
+		</td>	
+	
+
+  </tr>
+</table>
+	<!--
+    	This script downloaded from www.JavaScriptBank.com
+    	Come to view and download over 2000+ free javascript at www.JavaScriptBank.com
+	-->
+
+
+<script src="script.js"></script>
+
+
+</html>
