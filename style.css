@@ -17,8 +17,9 @@ table,
 		margin-right: auto;
 		border-radius:20px;
 	}
+Body{
+	font-family: Ariel;
+	backgrouns-color: LawnGreen;
+	)
 
-body{
-  font-family: Arial;
-  background-color: LawnGreen;
-}
+
