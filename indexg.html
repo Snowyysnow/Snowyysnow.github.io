@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>jQuery Mobile Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body> 
+	
+	<!-- page 1 -->
+	<div data-role="page"  id="home">
+	<header data-role="header">
+		<h1>SJV Town Hall</h1>
+		<div data-role="navbar">
+		<ul>
+		<li><a href="#home" class="ui-btn-active"
+		data-icon="home" data-theme="b">Home</a></li>
+		<li><a href="#speakers"
+		data-icon="star" data-theme="b">Speakers</a></li>
+		<li><a href="#contactus
+		data-icon="grid" data-theme="b">Contact Us</a></li>
+		</ul>
+		</div>
+	</header>
+	
+		<section data-role="content">
+		<h3>Nicks Homepage</h3>
+		
+		<p>
+		The practice has just received a small government grant to improve its IT service to the rural
+		community although there are restrictions on how the money is used. For example they are unable
+		to use any non-NHS approved software. 
+		</p>
+		
+		<p>
+		They are accountable to the NHS funding committee and will 
+		need to justify their actions.
+		</p>
+		
+		<a href="#page2" data-transition="flip" >Page 2</a>
+		
+		
+		
+		</section>
+		
+	<footer data-role="footer"><h4>&copy; 2011</h4></footer>
+	</div>
+  
+  
+  
+  <!-- page 2 -->
+	<div data-role="page"  id="page2">
+	<header data-role="header"><h1>SJV Town Hall</h1></header>
+	
+		<section data-role="content">
+		<h3>Nicks Page 2</h3>
+		
+		<p>
+		The practice has just received a small government grant to improve its IT service to the rural
+		community although there are restrictions on how the money is used. For example they are unable
+		to use any non-NHS approved software. 
+		</p>
+		
+		<a href="#home" data-transition="pop" >Homepage</a>
+		
+		
+		</section>
+		
+	<footer data-role="footer"><h4>&copy; 2011</h4></footer>
+	</div>
+  
+  
+  
+  
+</body>
+
+</html>
