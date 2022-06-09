@@ -179,7 +179,7 @@ function answerit(){
 					alert('Right');
 					userPoints++;
 					document.math.points.value=userPoints;
-					time++5;
+					time+5;
 					claps.play();
 					var gameTimer=setTimeout("claps.pause()", 1000);
 				 setlevel();
